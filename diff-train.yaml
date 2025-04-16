@@ -1,7 +1,0 @@
-# diff-train.yaml
-train: datasets/diff-types/train
-val: datasets/diff-types/val
-test: datasets/diff-types/test
-
-nc: 10
-names: ['Battery', 'Keyboard', 'Microwave', 'Mobile', 'Mouse', 'PCB', 'Player', 'Printer', 'Television', 'Washing Machine']
