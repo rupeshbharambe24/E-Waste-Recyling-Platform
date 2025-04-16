@@ -1,7 +1,16 @@
 import google.generativeai as genai
+from dotenv import load_dotenv
+import os
+
+
+load_dotenv()
 
 # Using Gemini API Key
-genai.configure(api_key='AIzaSyC-gG40rcBMxEgMMmCTBi99trO4VHnUPPY')
+api_key = os.getenv("gemini") 
+if not api_key:
+    raise ValueError("No API key found. Please set GEMINI_API_KEY in your .env file")
+
+genai.configure(api_key=api_key)
 model = genai.GenerativeModel('gemini-2.0-flash') 
 
 def clean_response(text):
@@ -45,13 +54,12 @@ def get_ewaste_management_info(ewaste_item):
     cleaned_response = clean_response(response.text)
     return cleaned_response
 
-# 
 print("E-Waste Management Assistant")
 print("Enter an electronic item ;")
 user_input = input("Enter your e-waste item :- ").strip()
 if user_input:
     result = get_ewaste_management_info(user_input)
-    print("\nE-Waste Management,Information:")
+    print("\nE-Waste Management Information:")
     print(result)
 else:
     print("Please enter a Valid e-waste atom.")
