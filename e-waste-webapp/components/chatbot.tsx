@@ -42,53 +42,53 @@ export function Chatbot() {
   }
 
   const handleSend = async () => {
-    if (inputValue.trim() === "") return
-  
-    const userMessage: Message = {
-      id: Date.now().toString(),
-      content: inputValue,
-      sender: "user",
+  if (inputValue.trim() === "") return
+
+  const userMessage: Message = {
+    id: Date.now().toString(),
+    content: inputValue,
+    sender: "user",
+    timestamp: new Date(),
+  }
+  setMessages([...messages, userMessage])
+  setInputValue("")
+
+  try {
+    const res = await fetch("http://127.0.0.1:5000/api/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        message: inputValue,
+        language: language,
+      }),
+    })
+
+    const data = await res.json()
+
+    const botMessage: Message = {
+      id: (Date.now() + 1).toString(),
+      content: data.response,
+      sender: "bot",
       timestamp: new Date(),
     }
-    setMessages([...messages, userMessage])
-    setInputValue("")
-  
-    try {
-      const res = await fetch("http://127.0.0.1:5000/api/chat", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          message: inputValue,
-          language: language,
-        }),
-      })
-  
-      const data = await res.json()
-  
-      const botMessage: Message = {
+
+    setMessages((prevMessages) => [...prevMessages, botMessage])
+  } catch (error) {
+    console.error("Error calling chatbot API:", error)
+    setMessages((prevMessages) => [
+      ...prevMessages,
+      {
         id: (Date.now() + 1).toString(),
-        content: data.response,
+        content: "Sorry, something went wrong. Please try again later.",
         sender: "bot",
         timestamp: new Date(),
-      }
-  
-      setMessages((prevMessages) => [...prevMessages, botMessage])
-    } catch (error) {
-      console.error("Error calling chatbot API:", error)
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        {
-          id: (Date.now() + 1).toString(),
-          content: "Sorry, something went wrong. Please try again later.",
-          sender: "bot",
-          timestamp: new Date(),
-        },
-      ])
-    }
+      },
+    ])
   }
-  
+}
+
   const getBotResponse = (input: string): string => {
     const lowerInput = input.toLowerCase()
 
