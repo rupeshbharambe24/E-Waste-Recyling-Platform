@@ -32,9 +32,6 @@ export function Navbar() {
             <Link href="/about" className="text-sm font-medium hover:text-green-600 transition-colors">
               About
             </Link>
-            <Link href="/marketplace" className="text-sm font-medium hover:text-green-600 transition-colors">
-              Marketplace
-            </Link>
             <Link href="/education" className="text-sm font-medium hover:text-green-600 transition-colors">
               Education
             </Link>
@@ -48,9 +45,6 @@ export function Navbar() {
               <>
                 <Link href="/dashboard" className="text-sm font-medium hover:text-green-600 transition-colors">
                   Dashboard
-                </Link>
-                <Link href="/rewards" className="text-sm font-medium hover:text-green-600 transition-colors">
-                  Rewards
                 </Link>
               </>
             )}

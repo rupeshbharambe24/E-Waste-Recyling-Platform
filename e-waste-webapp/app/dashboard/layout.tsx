@@ -77,12 +77,12 @@ const sidebarItems = [
   {
     title: "Redeem Rewards",
     icon: Gift,
-    href: "/dashboard/redeem",
+    href: "/rewards",
   },
   {
     title: "Analytics",
     icon: BarChart3,
-    href: "/dashboard/analytics",
+    href: "/analytics",
   },
 ]
 
