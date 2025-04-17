@@ -1,0 +1,151 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 142.1 76.2% 36.3%;
+    --primary-foreground: 355.7 100% 97.3%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 142.1 76.2% 36.3%;
+    --radius: 1rem;
+
+    /* Sidebar variables */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 142.1 76.2% 36.3%;
+
+    /* Green theme variants */
+    --emerald-primary: 142.1 76.2% 36.3%;
+    --emerald-primary-foreground: 355.7 100% 97.3%;
+    --emerald-ring: 142.1 76.2% 36.3%;
+
+    --forest-primary: 160 84.1% 39.2%;
+    --forest-primary-foreground: 355.7 100% 97.3%;
+    --forest-ring: 160 84.1% 39.2%;
+
+    --mint-primary: 150 60% 54%;
+    --mint-primary-foreground: 355.7 100% 97.3%;
+    --mint-ring: 150 60% 54%;
+
+    --lime-primary: 84.2 60.6% 44.1%;
+    --lime-primary-foreground: 355.7 100% 97.3%;
+    --lime-ring: 84.2 60.6% 44.1%;
+
+    --sage-primary: 120 16.7% 50.2%;
+    --sage-primary-foreground: 355.7 100% 97.3%;
+    --sage-ring: 120 16.7% 50.2%;
+  }
+
+  [data-green-theme="emerald"] {
+    --primary: var(--emerald-primary);
+    --primary-foreground: var(--emerald-primary-foreground);
+    --ring: var(--emerald-ring);
+  }
+
+  [data-green-theme="forest"] {
+    --primary: var(--forest-primary);
+    --primary-foreground: var(--forest-primary-foreground);
+    --ring: var(--forest-ring);
+  }
+
+  [data-green-theme="mint"] {
+    --primary: var(--mint-primary);
+    --primary-foreground: var(--mint-primary-foreground);
+    --ring: var(--mint-ring);
+  }
+
+  [data-green-theme="lime"] {
+    --primary: var(--lime-primary);
+    --primary-foreground: var(--lime-primary-foreground);
+    --ring: var(--lime-ring);
+  }
+
+  [data-green-theme="sage"] {
+    --primary: var(--sage-primary);
+    --primary-foreground: var(--sage-primary-foreground);
+    --ring: var(--sage-ring);
+  }
+
+  .dark {
+    --background: 20 14.3% 4.1%;
+    --foreground: 0 0% 95%;
+    --card: 24 9.8% 10%;
+    --card-foreground: 0 0% 95%;
+    --popover: 0 0% 9%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 142.1 70.6% 45.3%;
+    --primary-foreground: 144.9 80.4% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 12 6.5% 15.1%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 85.7% 97.3%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 142.4 71.8% 29.2%;
+
+    /* Sidebar variables */
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 0 0% 98%;
+    --sidebar-primary-foreground: 240 5.9% 10%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 142.4 71.8% 29.2%;
+
+    /* Green theme variants - dark mode */
+    --emerald-primary: 142.1 70.6% 45.3%;
+    --emerald-primary-foreground: 144.9 80.4% 10%;
+    --emerald-ring: 142.4 71.8% 29.2%;
+
+    --forest-primary: 160 84.1% 39.2%;
+    --forest-primary-foreground: 144.9 80.4% 10%;
+    --forest-ring: 160 84.1% 29.2%;
+
+    --mint-primary: 150 60% 54%;
+    --mint-primary-foreground: 144.9 80.4% 10%;
+    --mint-ring: 150 60% 34%;
+
+    --lime-primary: 84.2 60.6% 44.1%;
+    --lime-primary-foreground: 144.9 80.4% 10%;
+    --lime-ring: 84.2 60.6% 34.1%;
+
+    --sage-primary: 120 16.7% 50.2%;
+    --sage-primary-foreground: 144.9 80.4% 10%;
+    --sage-ring: 120 16.7% 40.2%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
