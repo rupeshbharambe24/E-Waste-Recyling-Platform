@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 import { User, Mail, Phone, MapPin, Calendar, Award, Coins } from "lucide-react"
 import { useAuth } from "@/contexts/auth-provider"
+import Link from "next/link"
 
 export default function ProfilePage() {
   const { user } = useAuth()
@@ -53,17 +54,23 @@ export default function ProfilePage() {
               <CardTitle>Quick Actions</CardTitle>
             </CardHeader>
             <CardContent className="space-y-2">
-              <Button variant="outline" className="w-full justify-start gap-2">
-                <MapPin className="h-4 w-4" />
-                View Recycling Centers
+              <Button variant="outline" className="w-full justify-start gap-2" asChild>
+                <Link href="/recycling-centers">
+                  <MapPin className="h-4 w-4" />
+                  View Recycling Centers
+                </Link>
               </Button>
-              <Button variant="outline" className="w-full justify-start gap-2">
-                <Award className="h-4 w-4" />
-                Redeem Rewards
+              <Button variant="outline" className="w-full justify-start gap-2" asChild>
+                <Link href="/rewards">
+                  <Award className="h-4 w-4" />
+                  Redeem Rewards
+                </Link>
               </Button>
-              <Button variant="outline" className="w-full justify-start gap-2">
-                <Calendar className="h-4 w-4" />
-                Schedule Pickup
+              <Button variant="outline" className="w-full justify-start gap-2" asChild>
+                <Link href="/schedule-pickup">
+                  <Calendar className="h-4 w-4" />
+                  Schedule Pickup
+                </Link>
               </Button>
             </CardContent>
           </Card>
@@ -79,21 +86,39 @@ export default function ProfilePage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="name">Full Name</Label>
-                  <Input id="name" value={user?.name || ""} readOnly />
+                  <Input 
+                    id="name" 
+                    defaultValue={user?.name || ""} 
+                    readOnly
+                  />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="email">Email</Label>
-                  <Input id="email" value={user?.email || ""} readOnly />
+                  <Input 
+                    id="email" 
+                    defaultValue={user?.email || ""} 
+                    readOnly
+                  />
                 </div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="phone">Phone</Label>
-                  <Input id="phone" placeholder="Not provided" readOnly />
+                  <Input 
+                    id="phone" 
+                    defaultValue="" 
+                    placeholder="Not provided" 
+                    readOnly
+                  />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="location">Location</Label>
-                  <Input id="location" placeholder="Not provided" readOnly />
+                  <Input 
+                    id="location" 
+                    defaultValue="" 
+                    placeholder="Not provided" 
+                    readOnly
+                  />
                 </div>
               </div>
             </CardContent>
@@ -123,7 +148,7 @@ export default function ProfilePage() {
               <div className="space-y-4">
                 <div className="flex items-start gap-4">
                   <div className="p-2 rounded-full bg-green-100 dark:bg-green-900/50 mt-1">
-                    <Recycle className="h-4 w-4 text-green-600 dark:text-green-400" />
+                    <Coins className="h-4 w-4 text-green-600 dark:text-green-400" />
                   </div>
                   <div>
                     <p className="font-medium">Laptop Recycled</p>
