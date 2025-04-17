@@ -23,46 +23,47 @@ export function Navbar() {
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center gap-2">
           <Link href="/" className="flex items-center gap-2">
-            <span className="text-xl font-bold text-green-600">E-Wise</span>
+            <span className="text-2xl font-bold text-green-600">E-Wise</span>
           </Link>
-          <nav className="hidden md:flex gap-6 ml-6">
-            <Link href="/" className="text-sm font-medium hover:text-green-600 transition-colors">
-              Home
-            </Link>
-            <Link href="/about" className="text-sm font-medium hover:text-green-600 transition-colors">
-              About
-            </Link>
-            <Link href="/education" className="text-sm font-medium hover:text-green-600 transition-colors">
-              Education
-            </Link>
-            <Link href="/donate" className="text-sm font-medium hover:text-green-600 transition-colors">
-              Donate
-            </Link>
-            <Link href="/contact" className="text-sm font-medium hover:text-green-600 transition-colors">
-              Contact
-            </Link>
-            {isLoggedIn && (
-              <>
-                <Link href="/dashboard" className="text-sm font-medium hover:text-green-600 transition-colors">
-                  Dashboard
-                </Link>
-              </>
-            )}
-            {isLoggedIn && user?.role === "admin" && (
-              <Link href="/admin/dashboard" className="text-sm font-medium hover:text-green-600 transition-colors">
-                Admin
-              </Link>
-            )}
-            {isLoggedIn && user?.role === "organization" && (
-              <Link
-                href="/organization/dashboard"
-                className="text-sm font-medium hover:text-green-600 transition-colors"
-              >
-                Organization
-              </Link>
-            )}
-          </nav>
         </div>
+        
+        {/* Centered Navigation */}
+        <nav className="hidden md:flex gap-6 absolute left-1/2 transform -translate-x-1/2">
+          <Link href="/" className="text-sm font-medium hover:text-green-600 transition-colors">
+            Home
+          </Link>
+          <Link href="/about" className="text-sm font-medium hover:text-green-600 transition-colors">
+            About
+          </Link>
+          <Link href="/education" className="text-sm font-medium hover:text-green-600 transition-colors">
+            Education
+          </Link>
+          <Link href="/donate" className="text-sm font-medium hover:text-green-600 transition-colors">
+            Donate
+          </Link>
+          <Link href="/contact" className="text-sm font-medium hover:text-green-600 transition-colors">
+            Contact
+          </Link>
+          {isLoggedIn && (
+            <Link href="/dashboard" className="text-sm font-medium hover:text-green-600 transition-colors">
+              Dashboard
+            </Link>
+          )}
+          {isLoggedIn && user?.role === "admin" && (
+            <Link href="/admin/dashboard" className="text-sm font-medium hover:text-green-600 transition-colors">
+              Admin
+            </Link>
+          )}
+          {isLoggedIn && user?.role === "organization" && (
+            <Link
+              href="/organization/dashboard"
+              className="text-sm font-medium hover:text-green-600 transition-colors"
+            >
+              Organization
+            </Link>
+          )}
+        </nav>
+
         <div className="flex items-center gap-2">
           <GreenThemeSelector />
           <ThemeToggle />

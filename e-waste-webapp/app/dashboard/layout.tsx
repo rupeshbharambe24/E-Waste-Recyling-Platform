@@ -57,7 +57,7 @@ const sidebarItems = [
   {
     title: "Rewards",
     icon: Coins,
-    href: "/dashboard/rewards",
+    href: "/rewards",
   },
   {
     title: "Marketplace",
@@ -72,11 +72,6 @@ const sidebarItems = [
   {
     title: "Scan QR Code",
     icon: QrCode,
-    href: "/dashboard/scan-qr",
-  },
-  {
-    title: "Redeem Rewards",
-    icon: Gift,
     href: "/rewards",
   },
   {
