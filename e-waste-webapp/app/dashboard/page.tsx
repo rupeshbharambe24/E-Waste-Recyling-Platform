@@ -16,7 +16,7 @@ export default function DashboardPage() {
         <div>
           <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
           <p className="text-muted-foreground">
-            Welcome back, John! Here's an overview of your e-waste management activities.
+            Welcome back, Rupesh! Here's an overview of your e-waste management activities.
           </p>
         </div>
         <div className="flex items-center gap-2">

@@ -35,21 +35,36 @@ export default function UploadItemPage() {
   }
 
   const analyzeImage = () => {
-    setIsAnalyzing(true)
-    // Simulate AI analysis
-    setTimeout(() => {
-      setDetectedItem({
-        name: "Smartphone",
-        type: "Electronics",
-        condition: "Used",
-        estimatedValue: 45,
-        recyclableComponents: ["Battery", "Screen", "Circuit Board", "Plastic Casing"],
-        environmentalImpact: "Medium",
+    if (!uploadedImage) return;
+  
+    setIsAnalyzing(true);
+  
+    const blob = fetch(uploadedImage)
+      .then(res => res.blob())
+      .then(blob => {
+        const formData = new FormData();
+        formData.append("image", blob, "uploaded_image.jpg");
+  
+        return fetch("http://localhost:5000/analyze", {
+          method: "POST",
+          body: formData,
+        });
       })
-      setIsAnalyzing(false)
-    }, 2000)
-  }
-
+      .then(res => res.json())
+      .then(data => {
+        if (data.error) {
+          alert(data.error);
+          return;
+        }
+        setDetectedItem(data);
+      })
+      .catch(err => {
+        console.error("Error analyzing image:", err);
+        alert("An error occurred while analyzing the image.");
+      })
+      .finally(() => setIsAnalyzing(false));
+  };
+  
   const resetUpload = () => {
     setUploadedImage(null)
     setDetectedItem(null)

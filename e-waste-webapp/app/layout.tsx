@@ -12,8 +12,7 @@ const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "E-Waste Management Platform",
-  description: "A sustainable solution for electronic waste management",
-    generator: 'v0.dev'
+  description: "A sustainable solution for electronic waste management",    
 }
 
 export default function RootLayout({

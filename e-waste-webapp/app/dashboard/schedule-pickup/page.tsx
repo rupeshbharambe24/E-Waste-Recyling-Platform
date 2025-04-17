@@ -54,12 +54,46 @@ export default function PickupPage() {
     setStep(step - 1)
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log("Form submitted:", formData)
-    setStep(4)
-  }
-
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    try {
+      // Get user data from your auth context or wherever it's stored
+      const userData = {
+        name: "Customer Name", // Replace with actual user data
+        phone: "CustomerPhoneNumber" // Replace with actual user data
+      };
+  
+      // Send data to your backend
+      const response = await fetch('/api/schedule-pickup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          pickup_date: formData.date?.toISOString().split('T')[0],
+          time_slot: formData.timeSlot,
+          address: `${formData.address}, ${formData.city}, ${formData.zipCode}`,
+          waste_type: formData.wasteType,
+          item_count: formData.itemCount,
+          customer_name: userData.name,
+          customer_contact: userData.phone
+        }),
+      });
+  
+      const result = await response.json();
+      
+      if (response.ok) {
+        setStep(4); // Move to confirmation step
+      } else {
+        throw new Error(result.error || 'Failed to schedule pickup');
+      }
+    } catch (error) {
+      console.error('Error scheduling pickup:', error);
+      // Show error to user
+    }
+  };
+  
   const handleChange = (field: keyof FormData, value: string | Date | null) => {
     setFormData({
       ...formData,

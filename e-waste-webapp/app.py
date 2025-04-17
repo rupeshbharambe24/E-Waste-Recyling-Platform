@@ -1,54 +1,69 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS
-import cv2
-import numpy as np
-import supervision as sv
-from inference import get_model
+from twilio.rest import Client
+from datetime import datetime
 import os
-from werkzeug.utils import secure_filename
+from dotenv import load_dotenv
+from flask_cors import CORS
+
+load_dotenv()
 
 app = Flask(__name__)
-CORS(app)
+CORS(app)  # Enable CORS for all routes
 
-# Load model once
-model = get_model(model_id="taylor-swift-records/3")
+# Twilio credentials
+TWILIO_ACCOUNT_SID = os.getenv('TWILIO_ACCOUNT_SID')
+TWILIO_AUTH_TOKEN = os.getenv('TWILIO_AUTH_TOKEN')
+TWILIO_WHATSAPP_NUMBER = os.getenv('TWILIO_WHATSAPP_NUMBER')
+YOUR_PERSONAL_WHATSAPP = os.getenv('YOUR_PERSONAL_WHATSAPP')  # Format: whatsapp:+1234567890
 
-@app.route("/analyze", methods=["POST"])
-def analyze_image():
-    if "image" not in request.files:
-        return jsonify({"error": "No image uploaded"}), 400
+client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
 
-    file = request.files["image"]
-    filename = secure_filename(file.filename)
-    file_bytes = np.frombuffer(file.read(), np.uint8)
-    image = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
+@app.route('/api/schedule-pickup', methods=['POST'])
+def schedule_pickup():
+    data = request.json
+    
+    # Extract pickup details from request
+    pickup_date = data.get('pickup_date')
+    time_slot = data.get('time_slot')
+    address = data.get('address')
+    waste_type = data.get('waste_type')
+    item_count = data.get('item_count')
+    
+    # Format the date for display
+    formatted_date = datetime.strptime(pickup_date, '%Y-%m-%d').strftime('%B %d, %Y')
+    
+    try:
+        # Send WhatsApp message to YOUR personal number
+        message = client.messages.create(
+            from_=TWILIO_WHATSAPP_NUMBER,
+            body=f'''
+📅 New E-Waste Pickup Scheduled!
+            
+🗓️ Date: {formatted_date}
+⏰ Time Slot: {time_slot}
+📍 Address: {address}
+📦 Items: {item_count} {waste_type}
 
-    # Run inference
-    results = model.infer(image)[0]
-    detections = sv.Detections.from_inference(results)
+Customer Details:
+- Name: {data.get('customer_name', 'Not provided')}
+- Contact: {data.get('customer_contact', 'Not provided')}
 
-    # Prepare response data
-    detected_items = []
-    for label, box in zip(detections.class_name, detections.xyxy):
-        detected_items.append({
-            "name": label,
-            "bounding_box": [int(x) for x in box.tolist()]
-        })
+Action Required: Please confirm this pickup.
+            ''',
+            to=YOUR_PERSONAL_WHATSAPP
+        )
+        
+        return jsonify({
+            'success': True,
+            'message': 'Pickup scheduled and notification sent to admin',
+            'sid': message.sid
+        }), 200
+        
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        }), 500
 
-    # For demo: mock metadata for the first item
-    if detected_items:
-        main_item = detected_items[0]["name"]
-        response = {
-            "name": main_item,
-            "type": "Electronics",
-            "condition": "Used",
-            "estimatedValue": 45,
-            "recyclableComponents": ["Battery", "Screen", "Circuit Board", "Plastic Casing"],
-            "environmentalImpact": "Medium"
-        }
-        return jsonify(response)
-    else:
-        return jsonify({"error": "No recognizable item found"}), 404
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run(debug=True)
