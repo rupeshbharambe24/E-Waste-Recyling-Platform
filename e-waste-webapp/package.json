@@ -45,6 +45,7 @@
     "cmdk": "1.0.4",
     "date-fns": "latest",
     "embla-carousel-react": "8.5.1",
+    "formidable": "^3.5.2",
     "framer-motion": "latest",
     "input-otp": "1.4.1",
     "lucide-react": "^0.454.0",
@@ -63,6 +64,7 @@
     "zod": "latest"
   },
   "devDependencies": {
+    "@types/formidable": "^3.4.5",
     "@types/node": "^22",
     "@types/react": "^18.3.20",
     "@types/react-dom": "^18.3.6",

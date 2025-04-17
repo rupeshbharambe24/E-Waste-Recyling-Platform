@@ -63,7 +63,7 @@ export default function UploadItemPage() {
           Upload an image of your e-waste item for AI-powered identification and valuation.
         </p>
       </div>
-
+    
       <Tabs defaultValue="ai-detection" className="space-y-6">
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="ai-detection">AI Detection</TabsTrigger>
