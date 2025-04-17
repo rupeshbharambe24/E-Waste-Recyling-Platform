@@ -95,7 +95,7 @@ export default function DashboardLayout({
           <SidebarHeader className="flex items-center justify-between p-4">
             <Link href="/dashboard" className="flex items-center gap-2">
               <Leaf className="h-6 w-6 text-emerald-500" />
-              <span className="font-bold text-xl">EcoRecycle</span>
+              <span className="font-bold text-xl">E-Wise</span>
             </Link>
           </SidebarHeader>
           <SidebarContent>
@@ -141,8 +141,8 @@ export default function DashboardLayout({
                 <AvatarFallback>JD</AvatarFallback>
               </Avatar>
               <div className="flex flex-col">
-                <span className="font-medium">John Doe</span>
-                <span className="text-xs text-muted-foreground">john@example.com</span>
+                <span className="font-medium">Rupesh Bharambe</span>
+                <span className="text-xs text-muted-foreground">rbtech44@gmail.com</span>
               </div>
             </div>
             <div className="mt-4 flex items-center gap-2">
@@ -156,21 +156,25 @@ export default function DashboardLayout({
           </SidebarFooter>
         </Sidebar>
         <div className="flex-1">
-          <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b bg-background px-6">
-            <SidebarTrigger />
-            <div className="ml-auto flex items-center gap-4">
-              <Button variant="outline" size="sm" className="gap-1">
+        <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b bg-background px-6">
+          <SidebarTrigger />
+          <div className="ml-auto flex items-center gap-4">
+            <Button variant="outline" size="sm" className="gap-1" asChild>
+              <Link href="/profile">
                 <User className="h-4 w-4" />
                 <span>Profile</span>
-              </Button>
-              <Button variant="outline" size="sm" className="gap-1">
+              </Link>
+            </Button>
+            <Button variant="outline" size="sm" className="gap-1" asChild>
+              <Link href="/settings">
                 <Settings className="h-4 w-4" />
                 <span>Settings</span>
-              </Button>
-            </div>
-          </header>
-          <main className="p-6">{children}</main>
-        </div>
+              </Link>
+            </Button>
+          </div>
+        </header>
+        <main className="p-6">{children}</main>
+      </div>
       </div>
     </SidebarProvider>
   )
