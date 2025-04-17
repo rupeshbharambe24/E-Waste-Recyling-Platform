@@ -41,10 +41,9 @@ export function Chatbot() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
   }
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (inputValue.trim() === "") return
-
-    // Add user message
+  
     const userMessage: Message = {
       id: Date.now().toString(),
       content: inputValue,
@@ -53,27 +52,43 @@ export function Chatbot() {
     }
     setMessages([...messages, userMessage])
     setInputValue("")
-
-    // Simulate bot response after a short delay
-    setTimeout(() => {
-      const botResponses: { [key: string]: string } = {
-        english: getBotResponse(inputValue),
-        hindi: "नमस्ते! मैं आपकी कैसे सहायता कर सकता हूँ?",
-        spanish: "¡Hola! ¿Cómo puedo ayudarte hoy?",
-        french: "Bonjour! Comment puis-je vous aider aujourd'hui?",
-        german: "Hallo! Wie kann ich Ihnen heute helfen?",
-      }
-
+  
+    try {
+      const res = await fetch("http://127.0.0.1:5000/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          message: inputValue,
+          language: language,
+        }),
+      })
+  
+      const data = await res.json()
+  
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
-        content: botResponses[language] || botResponses.english,
+        content: data.response,
         sender: "bot",
         timestamp: new Date(),
       }
+  
       setMessages((prevMessages) => [...prevMessages, botMessage])
-    }, 1000)
+    } catch (error) {
+      console.error("Error calling chatbot API:", error)
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        {
+          id: (Date.now() + 1).toString(),
+          content: "Sorry, something went wrong. Please try again later.",
+          sender: "bot",
+          timestamp: new Date(),
+        },
+      ])
+    }
   }
-
+  
   const getBotResponse = (input: string): string => {
     const lowerInput = input.toLowerCase()
 
