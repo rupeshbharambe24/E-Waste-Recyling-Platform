@@ -29,9 +29,10 @@ npm install
 npm run dev
 
 ### Prerequisites
-
-- Node.js & npm
+- React & TypeScript
+- npm
 - Python 3.11
+- Flask
 - pip
 - Git
 
