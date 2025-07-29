@@ -1,6 +1,6 @@
-# ♻️ SentinelX - AI-Powered E-Waste Management & Recycling System
+# ♻️ E-Wise - AI-Powered E-Waste Management & Recycling System
 
-SentinelX is a smart, AI-driven e-waste management and recycling platform developed for HackGenX. It enables efficient identification, categorization, and processing of electronic waste using computer vision and a multilingual chatbot interface. The system promotes environmental sustainability by automating and simplifying the e-waste recycling process for citizens and authorities.
+E-Wise is a smart, AI-driven e-waste management and recycling platform. It enables efficient identification, categorization, and processing of electronic waste using computer vision and a multilingual chatbot interface. The system promotes environmental sustainability by automating and simplifying the e-waste recycling process for citizens and authorities.
 
 ## 🚀 Features
 
