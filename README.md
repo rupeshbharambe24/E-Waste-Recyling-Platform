@@ -21,12 +21,14 @@ SentinelX is a smart, AI-driven e-waste management and recycling platform develo
 - **TTS:** Python-based text-to-speech engine
 
 ## 📦 Installation
+```
 python -m venv venv
 cd e-waste-webapp
 pip install -r requirements.txt
 py app.py
 npm install 
 npm run dev
+```
 
 ### Prerequisites
 - React & TypeScript
